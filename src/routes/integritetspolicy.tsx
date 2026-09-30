@@ -32,7 +32,7 @@ function Sektion({ titel, children }: { titel: string; children: React.ReactNode
 function Integritetspolicy() {
   return (
     <article className="container-page max-w-3xl pt-16 pb-8 sm:pt-24">
-      <Heading as="h1" className="text-4xl sm:text-5xl">
+      <Heading as="h1" className="text-[clamp(1.5rem,6.5vw,2.5rem)] sm:text-4xl">
         Så hanterar vi dina personuppgifter
       </Heading>
       <p className="mt-6 text-base leading-relaxed text-muted-foreground">

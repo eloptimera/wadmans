@@ -12,7 +12,7 @@ const LANKAR = [
 ] as const;
 
 const LANK_KLASS =
-  "text-sm font-semibold whitespace-nowrap text-muted-foreground underline decoration-transparent decoration-[0.12em] underline-offset-[0.5em] transition-colors duration-200 hover:text-foreground hover:decoration-ultra";
+  "font-display text-xs font-bold tracking-[0.16em] whitespace-nowrap uppercase text-muted-foreground underline decoration-transparent decoration-[0.12em] underline-offset-[0.5em] transition-colors duration-200 hover:text-foreground hover:decoration-ultra";
 const LANK_AKTIV = "text-foreground decoration-ultra";
 
 export function Header() {
@@ -28,7 +28,7 @@ export function Header() {
   return (
     <header className="sticky top-3 z-50 px-3">
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex h-16 items-center justify-between gap-6 rounded-xl border border-border bg-background/80 px-4 backdrop-blur-xl sm:px-6">
+        <div className="flex h-16 items-center justify-between gap-6 rounded-full border border-border bg-background px-4 backdrop-blur-xl sm:px-6">
           <Link to="/" aria-label={`${FORETAG.namn}, startsida`} onClick={() => setOppen(false)}>
             <Varumarke />
           </Link>
@@ -51,12 +51,12 @@ export function Header() {
             <a
               href={`tel:${FORETAG.telefonLank}`}
               aria-label={`Ring ${FORETAG.telefon}`}
-              className="flex items-center gap-2 text-sm font-semibold whitespace-nowrap"
+              className="flex items-center gap-2 text-sm whitespace-nowrap"
             >
               <Phone className="size-4" strokeWidth={1.75} aria-hidden="true" />
               <span className="mono hidden xl:inline">{FORETAG.telefon}</span>
             </a>
-            <Link to="/offert" className="btn-base btn-primary min-h-10 px-5 py-2.5 text-sm">
+            <Link to="/offert" className="btn-base btn-primary min-h-10 px-5 py-2.5">
               Begär offert
             </Link>
           </div>
@@ -90,7 +90,7 @@ export function Header() {
 
         {oppen && (
           <nav
-            className="absolute inset-x-0 top-full mt-2 flex flex-col rounded-xl border border-border bg-background px-6 py-4 shadow-xl shadow-black/10 md:hidden"
+            className="absolute inset-x-0 top-full mt-2 flex flex-col rounded-lg border border-border bg-background px-6 py-4 shadow-xl shadow-black/10 md:hidden"
             aria-label="Mobilmeny"
           >
             {LANKAR.map((l) => (
@@ -108,7 +108,7 @@ export function Header() {
             <Link
               to="/offert"
               onClick={() => setOppen(false)}
-              className="btn-base btn-primary mt-3 text-sm"
+              className="btn-base btn-primary mt-3"
             >
               Begär offert
             </Link>

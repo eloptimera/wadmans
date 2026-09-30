@@ -36,7 +36,7 @@ function Rot() {
     <>
       <section className="container-page pt-16 pb-14 sm:pt-24">
         <Reveal>
-              <Heading as="h1" className="max-w-3xl text-[clamp(2rem,9vw,3rem)] sm:text-6xl">
+              <Heading as="h1" className="max-w-3xl text-[clamp(1.5rem,6.6vw,2.5rem)] sm:text-5xl lg:text-6xl">
             Sänk dina arbetskostnader med <Underline nowrap>ROT-avdrag</Underline>
           </Heading>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">

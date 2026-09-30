@@ -44,7 +44,7 @@ export function Kulorvagg() {
   return (
     <div className="grid gap-4">
       <div
-        className="grain relative isolate aspect-[5/4] overflow-hidden rounded-2xl sm:aspect-[16/10] lg:aspect-[4/5]"
+        className="grain relative isolate aspect-[5/4] overflow-hidden rounded-lg sm:aspect-[16/10] lg:aspect-[3/4]"
         style={{ backgroundColor: kulorAt(bas).hex, color: kulorAt(ink).ink }}
       >
         {mal !== null && (
@@ -61,7 +61,7 @@ export function Kulorvagg() {
         <div className="relative z-10 flex h-full flex-col justify-between p-5 sm:p-7">
           <p className="mono text-xs uppercase">Prova en kulör på väggen</p>
           <div>
-            <p className="font-display text-4xl leading-none font-semibold sm:text-5xl">
+            <p className="font-display text-xl leading-none font-bold tracking-[0.06em] uppercase sm:text-3xl lg:text-base">
               {kulorAt(visad).namn}
             </p>
             <p className="mono mt-2 text-sm">{kulorAt(visad).hex}</p>
@@ -69,19 +69,18 @@ export function Kulorvagg() {
         </div>
       </div>
 
-      <div role="group" aria-label="Välj kulör" className="grid grid-cols-4 gap-2">
+      <div role="group" aria-label="Välj kulör" className="flex flex-wrap justify-center gap-2.5">
         {KULORER.map((k, i) => (
           <button
             key={k.namn}
             type="button"
             aria-pressed={i === visad}
             aria-label={`Måla väggen i ${k.namn}`}
+            title={k.namn}
             onClick={() => valj(i)}
-            className="group flex flex-col overflow-hidden rounded-md bg-muted text-left transition-transform duration-200 ease-out hover:-translate-y-1 aria-pressed:ring-2 aria-pressed:ring-foreground"
-          >
-            <span className="block h-9 sm:h-11" style={{ backgroundColor: k.hex }} />
-            <span className="mono px-2 py-1.5 text-[12px] leading-tight">{k.namn}</span>
-          </button>
+            className="size-9 rounded-full border border-closing-foreground/40 transition-transform duration-200 ease-out hover:-translate-y-1 aria-pressed:ring-2 aria-pressed:ring-closing-foreground aria-pressed:ring-offset-2 aria-pressed:ring-offset-closing"
+            style={{ backgroundColor: k.hex }}
+          />
         ))}
       </div>
     </div>

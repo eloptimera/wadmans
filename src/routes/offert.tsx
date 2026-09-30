@@ -97,7 +97,7 @@ function Offert() {
     <>
       <section className="container-page pt-16 pb-12 sm:pt-24">
         <Reveal>
-          <Heading as="h1" className=" max-w-2xl text-5xl sm:text-6xl">
+          <Heading as="h1" className=" max-w-2xl text-4xl sm:text-5xl lg:text-6xl">
             Berätta om ditt <Underline>projekt</Underline>
           </Heading>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
@@ -145,7 +145,7 @@ function Offert() {
                 {UPPDRAGSTYPER.map((t) => (
                   <label
                     key={t}
-                    className={`cursor-pointer rounded-md border-2 px-4 py-2 text-sm transition-colors duration-300 ${
+                    className={`cursor-pointer rounded-full border-2 px-4 py-2 font-display text-xs tracking-[0.1em] uppercase transition-colors duration-300 ${
                       typer.includes(t)
                         ? "border-foreground bg-foreground text-background"
                         : "border-input hover:border-ultra hover:bg-muted"

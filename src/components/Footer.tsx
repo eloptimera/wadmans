@@ -1,6 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { FORETAG } from "@/lib/foretag";
 import { Underline } from "@/components/Heading";
+import { Logotyp } from "@/components/Logotyp";
+import { Penselring } from "@/components/Penselring";
 
 const FOOTER_LANK =
   "underline decoration-transparent decoration-[0.1em] underline-offset-[0.4em] transition-colors duration-200 hover:decoration-ultra";
@@ -13,10 +15,14 @@ export function Footer() {
   const visaCta = !UTAN_CTA.includes(sokvag);
 
   return (
-    <footer className="mt-24 bg-closing text-closing-foreground">
+    <footer
+      className="relative mt-24 overflow-hidden bg-closing text-closing-foreground"
+      style={{ "--ring-a": "var(--closing-foreground)", "--ring-b": "var(--ultra-soft)" } as React.CSSProperties}
+    >
+      <Penselring className="pointer-events-none absolute -top-16 -right-24 hidden size-[30rem] opacity-20 md:block" />
       {visaCta && (
-        <div className="container-page pt-20 pb-16 sm:pt-28">
-          <h2 className="max-w-3xl text-[clamp(2.25rem,6vw,4.75rem)] leading-[1]">
+        <div className="container-page relative pt-20 pb-16 sm:pt-28">
+          <h2 className="relative max-w-3xl text-[clamp(1.9rem,5vw,4rem)] leading-[1.05]">
             Berätta om ditt projekt. Vi ger dig en <Underline>gratis offert</Underline>
           </h2>
           <div className="mt-10 flex flex-wrap gap-3">
@@ -31,11 +37,14 @@ export function Footer() {
       )}
 
       <div
-        className={`container-page grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-3 ${visaCta ? "border-t border-closing-foreground/15" : ""}`}
+        className={`container-page relative grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-3 ${visaCta ? "border-t border-closing-foreground/15" : ""}`}
       >
         <div>
-          <p className="font-display text-3xl font-semibold tracking-tight">{FORETAG.namn}</p>
-          <p className="mt-4 max-w-xs text-sm leading-relaxed text-closing-foreground/75">
+          <Logotyp className="size-24" />
+          <p className="mt-5 font-display text-xl font-extrabold tracking-[0.1em] uppercase">
+            {FORETAG.namn}
+          </p>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-closing-foreground/75">
             Måleri i {FORETAG.ort}
             {FORETAG.aktivtSedan ? `. Aktiva sedan ${FORETAG.aktivtSedan}.` : "."}
           </p>
@@ -92,7 +101,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-closing-foreground/15">
-        <div className="container-page flex flex-wrap justify-between gap-2 py-6 text-xs text-closing-foreground/70">
+        <div className="container-page relative flex flex-wrap justify-between gap-2 py-6 text-xs text-closing-foreground/70">
           <span>
             © {new Date().getFullYear()} {FORETAG.namn}
           </span>

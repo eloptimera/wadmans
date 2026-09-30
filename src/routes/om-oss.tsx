@@ -43,7 +43,7 @@ function OmOss() {
   const kulor = kulorAt(useValdKulor());
 
   const fakta: { rubrik: string; varde: string }[] = [
-    { rubrik: "Företag", varde: `${FORETAG.namn} (${FORETAG.undertitel})` },
+    { rubrik: "Företag", varde: FORETAG.namn },
     { rubrik: "Organisationsnummer", varde: FORETAG.orgnr },
     ...(FORETAG.aktivtSedan ? [{ rubrik: "Aktiva sedan", varde: String(FORETAG.aktivtSedan) }] : []),
     ...(FORETAG.vd ? [{ rubrik: "VD", varde: FORETAG.vd }] : []),
@@ -57,7 +57,7 @@ function OmOss() {
     <>
       <section className="container-page pt-16 pb-16 sm:pt-24">
         <Reveal>
-          <Heading as="h1" className="max-w-3xl text-5xl sm:text-6xl">
+          <Heading as="h1" className="max-w-3xl text-3xl sm:text-5xl lg:text-6xl">
             Erfarna målare som sätter dina <Underline>visioner</Underline> i fokus
           </Heading>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">

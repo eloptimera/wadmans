@@ -1,20 +1,19 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import "@fontsource-variable/familjen-grotesk/wght.css";
-@import "@fontsource-variable/dm-sans/wght.css";
-@import "@fontsource/ibm-plex-mono/latin-400.css";
-@import "@fontsource/ibm-plex-mono/latin-500.css";
+@import "@fontsource-variable/cinzel/wght.css";
+@import "@fontsource-variable/source-serif-4/wght.css";
 
 @custom-variant dark (&:is(.dark *));
 
 /*
  * Designsystem: Wådmans Måleri
- * Idé: sajten är en vägg som målas. Kulören besökaren väljer i hero-väggen följer med genom
- * sidan, medan sajtens egna accent är ett enda pigment (ultramarin) som bara används för
- * fokus, understrykningar och hover. Neutrala ytor är kallt kalkvita, text är nästan svart.
- * Rubriker: Familjen Grotesk. Brödtext: DM Sans. Kulörnamn och koder: IBM Plex Mono.
- * Formspråk: en enda radie (--radius) överallt, som en kulörbricka.
+ * Utgår från loggan: krämvit yta, marinblå text och ett rostrött penseldrag. Typografin är
+ * versaler i en klassisk antikva (Cinzel) som i loggan, med Source Serif 4 för löptext.
+ * Layouten hämtar sin energi från en referens: mörk öppning, staplade jättelika rubriker,
+ * ett löpande band under hero och ovala konturknappar.
+ * Token-namnet --ultra är kvar av historiska skäl och betyder nu "pigmentet" (rost).
+ * Formspråk: knappar och kulörprickar är helt runda, ytor har en radie (--radius).
  */
 
 @theme inline {
@@ -23,9 +22,9 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 2px);
   --radius-2xl: calc(var(--radius) + 4px);
-  --font-display: "Familjen Grotesk Variable", "DM Sans Variable", system-ui, sans-serif;
-  --font-sans: "DM Sans Variable", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-display: "Cinzel Variable", "Trajan Pro", Georgia, serif;
+  --font-sans: "Source Serif 4 Variable", Georgia, serif;
+  --font-mono: "Cinzel Variable", Georgia, serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -47,65 +46,68 @@
   --color-ring: var(--ring);
   --color-line: var(--line);
   --color-ultra: var(--ultra);
+  --color-ultra-soft: var(--ultra-soft);
   --color-on-ultra: var(--on-ultra);
   --color-closing: var(--closing);
   --color-closing-foreground: var(--closing-foreground);
 }
 
 :root {
-  --radius: 0.375rem;
-  --ultra: #3d4fd1;
-  --on-ultra: #fbfbf9;
-  --background: #f5f5f2;
-  --foreground: #101418;
-  --card: #fbfbf9;
-  --card-foreground: #101418;
-  --popover: #fbfbf9;
-  --popover-foreground: #101418;
-  --primary: #101418;
-  --primary-foreground: #f5f5f2;
-  --secondary: #eceee9;
-  --secondary-foreground: #101418;
-  --muted: #eceee9;
-  --muted-foreground: #4f5a63;
-  --accent: #eceee9;
-  --accent-foreground: #101418;
+  --radius: 0.5rem;
+  --ultra: #b5482a;
+  --ultra-soft: #e58b6b;
+  --on-ultra: #f7f4ec;
+  --background: #f4f1ea;
+  --foreground: #1c2a44;
+  --card: #faf8f3;
+  --card-foreground: #1c2a44;
+  --popover: #faf8f3;
+  --popover-foreground: #1c2a44;
+  --primary: #1c2a44;
+  --primary-foreground: #f4f1ea;
+  --secondary: #ebe6da;
+  --secondary-foreground: #1c2a44;
+  --muted: #ebe6da;
+  --muted-foreground: #4a566c;
+  --accent: #ebe6da;
+  --accent-foreground: #1c2a44;
   --destructive: #a12d2d;
-  --destructive-foreground: #fbfbf9;
-  --border: rgba(16, 20, 24, 0.14);
-  --input: rgba(16, 20, 24, 0.5);
-  --ring: #101418;
-  --line: rgba(16, 20, 24, 0.5);
-  --closing: #101418;
-  --closing-foreground: #f1f2ee;
+  --destructive-foreground: #faf8f3;
+  --border: rgba(28, 42, 68, 0.18);
+  --input: rgba(28, 42, 68, 0.55);
+  --ring: #1c2a44;
+  --line: rgba(28, 42, 68, 0.55);
+  --closing: #16213a;
+  --closing-foreground: #f4f1ea;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ultra: #9aa8ff;
-    --on-ultra: #101418;
-    --background: #0f1418;
-    --foreground: #eceeea;
-    --card: #151c22;
-    --card-foreground: #eceeea;
-    --popover: #151c22;
-    --popover-foreground: #eceeea;
-    --primary: #eceeea;
-    --primary-foreground: #0f1418;
-    --secondary: #1a232a;
-    --secondary-foreground: #eceeea;
-    --muted: #1a232a;
-    --muted-foreground: #9ba6ae;
-    --accent: #1a232a;
-    --accent-foreground: #eceeea;
-    --destructive: #ff8f8f;
-    --destructive-foreground: #0f1418;
-    --border: rgba(236, 238, 234, 0.16);
-    --input: rgba(236, 238, 234, 0.55);
-    --ring: #eceeea;
-    --line: rgba(236, 238, 234, 0.55);
-    --closing: #080b0e;
-    --closing-foreground: #eceeea;
+    --ultra: #e58b6b;
+    --ultra-soft: #e58b6b;
+    --on-ultra: #16213a;
+    --background: #101829;
+    --foreground: #f1ede3;
+    --card: #16213a;
+    --card-foreground: #f1ede3;
+    --popover: #16213a;
+    --popover-foreground: #f1ede3;
+    --primary: #f1ede3;
+    --primary-foreground: #101829;
+    --secondary: #1b2742;
+    --secondary-foreground: #f1ede3;
+    --muted: #1b2742;
+    --muted-foreground: #a7b0c2;
+    --accent: #1b2742;
+    --accent-foreground: #f1ede3;
+    --destructive: #ff9a9a;
+    --destructive-foreground: #101829;
+    --border: rgba(241, 237, 227, 0.18);
+    --input: rgba(241, 237, 227, 0.55);
+    --ring: #f1ede3;
+    --line: rgba(241, 237, 227, 0.55);
+    --closing: #0a101d;
+    --closing-foreground: #f1ede3;
     color-scheme: dark;
   }
 }
@@ -131,11 +133,13 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 600;
-    line-height: 1.02;
-    letter-spacing: -0.03em;
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     text-wrap: balance;
     overflow-wrap: break-word;
+    hyphens: auto;
   }
 
   p {
@@ -156,17 +160,18 @@
 }
 
 @utility eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-muted-foreground);
 }
 
 @utility mono {
-  font-family: var(--font-mono);
-  letter-spacing: 0.02em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 
 /* Understrykning i pigmentfärg. En riktig text-underline, så texten ligger orörd ovanpå. */
@@ -184,11 +189,18 @@
   justify-content: center;
   gap: 0.6rem;
   min-height: 3rem;
-  border-radius: var(--radius);
-  padding: 0.85rem 1.5rem;
-  font-size: 0.97rem;
-  font-weight: 600;
-  white-space: nowrap;
+  border-radius: 9999px;
+  padding: 0.85rem 1.75rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.25;
+  @media (min-width: 40rem) {
+    white-space: nowrap;
+  }
   transition:
     background-color 250ms cubic-bezier(0.22, 1, 0.36, 1),
     color 250ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -299,6 +311,19 @@
   animation: rulla 900ms cubic-bezier(0.65, 0.05, 0.25, 1) both;
 }
 
+@keyframes lopa {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility lopa {
+  animation: lopa 38s linear infinite;
+}
+
 @media (scripting: none) {
   .reveal {
     opacity: 1;
@@ -309,6 +334,9 @@
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .lopa {
+    animation: none !important;
   }
   * {
     transition-duration: 0.01ms !important;

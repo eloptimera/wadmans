@@ -26,9 +26,9 @@ export type Foretag = {
 };
 
 export const FORETAG: Foretag = {
-  namn: "Wådmans Måleri",
+  namn: "Wådmans Måleri AB",
   kortnamn: "Wådmans",
-  undertitel: "Måleri",
+  undertitel: "Måleri AB",
   ort: "Göteborg",
   omrade: "Göteborg med omnejd",
   aktivtSedan: null,

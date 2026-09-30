@@ -54,7 +54,7 @@ function Kontakt() {
     <>
       <section className="container-page pt-16 pb-12 sm:pt-24">
         <Reveal>
-          <Heading as="h1" className="max-w-2xl text-4xl leading-[1.12] sm:text-5xl">
+          <Heading as="h1" className="max-w-2xl text-3xl sm:text-5xl">
             Hör av dig, vi <Underline>återkommer</Underline>
           </Heading>
         </Reveal>

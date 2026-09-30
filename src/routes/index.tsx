@@ -3,6 +3,9 @@ import { ArrowUpRight } from "lucide-react";
 import { Heading, Underline } from "@/components/Heading";
 import { Reveal } from "@/components/Reveal";
 import { Kulorvagg } from "@/components/Kulorvagg";
+import { Logotyp } from "@/components/Logotyp";
+import { Marquee } from "@/components/Marquee";
+import { Penselring } from "@/components/Penselring";
 import { Galleri, HAR_PROJEKTBILDER } from "@/components/Galleri";
 import { FORETAG } from "@/lib/foretag";
 import { kulorAt, useValdKulor } from "@/lib/kulorer";
@@ -62,32 +65,47 @@ function Start() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="container-page grid items-center gap-12 pt-14 pb-20 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pb-28">
-        <div>
-          <h1 className="text-[clamp(2.75rem,7.5vw,6rem)] leading-[0.98]">
-            Professionellt <Underline>måleri</Underline> i{"\u00a0"}
-            {FORETAG.ort}
-          </h1>
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Vi är ett passionerat team av erfarna målare som sätter dina unika visioner i fokus.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Link to="/offert" className="btn-base btn-primary">
-              Begär en gratis offert
-            </Link>
-            <a href={`tel:${FORETAG.telefonLank}`} className="btn-base btn-outline">
-              Ring {FORETAG.telefon}
-            </a>
+      {/* Hero: mörk öppning, staplad rubrik, kulörvägg och logotyp */}
+      <section
+        className="relative -mt-[4.75rem] overflow-hidden bg-closing pt-36 text-closing-foreground"
+        style={{ "--ring-a": "var(--closing-foreground)", "--ring-b": "var(--ultra-soft)" } as React.CSSProperties}
+      >
+        <div className="container-page grid items-center gap-12 pb-20 lg:grid-cols-[15rem_1fr_11rem] lg:gap-10 lg:pb-24">
+          <div className="order-2 lg:order-1">
+            <Kulorvagg />
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <h1 className="text-[clamp(1.85rem,5vw,4.6rem)] leading-[1.02] font-extrabold">
+              <span className="block">Professionellt</span>
+              <span className="block text-ultra-soft lg:pl-[12%]">måleri</span>
+              <span className="block">i{"\u00a0"}{FORETAG.ort}</span>
+            </h1>
+            <p className="mt-8 max-w-lg text-lg leading-relaxed text-closing-foreground/80">
+              Vi är ett passionerat team av erfarna målare som sätter dina unika visioner i fokus.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link to="/offert" className="btn-base btn-inverse">
+                Begär en gratis offert
+              </Link>
+              <a href={`tel:${FORETAG.telefonLank}`} className="btn-base btn-inverse-outline">
+                Ring {FORETAG.telefon}
+              </a>
+            </div>
+          </div>
+
+          <div className="relative order-3 hidden self-end lg:block">
+            <Penselring className="absolute -inset-6 size-[calc(100%+3rem)] opacity-60" />
+            <Logotyp className="relative" />
           </div>
         </div>
-        <Kulorvagg />
+        <Marquee items={TJANSTER.map((t) => t.titel)} />
       </section>
 
       {/* Om företaget */}
       <section className="container-page grid gap-10 py-20 sm:py-28 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
         <Reveal>
-          <Heading className="max-w-2xl text-4xl sm:text-5xl">
+          <Heading className="max-w-2xl text-3xl sm:text-4xl lg:text-5xl">
             Varje projekt är en <Underline>prioritet</Underline>
           </Heading>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
@@ -128,7 +146,7 @@ function Start() {
       <section className="bg-muted py-20 sm:py-28">
         <div className="container-page">
           <Reveal>
-            <Heading className="max-w-2xl text-4xl sm:text-5xl">
+            <Heading className="max-w-2xl text-3xl sm:text-4xl lg:text-5xl">
               Målning för hus, lägenheter och <Underline>fastigheter</Underline>
             </Heading>
           </Reveal>
@@ -147,7 +165,7 @@ function Start() {
                       {live ? `${t.tagg}, ${kulor.namn} ${kulor.hex}` : t.tagg}
                     </span>
                     <div className="mt-12">
-                      <h3 className="text-3xl sm:text-4xl">{t.titel}</h3>
+                      <h3 className="text-2xl sm:text-3xl">{t.titel}</h3>
                       <p className="mt-4 max-w-sm leading-relaxed opacity-85">{t.text}</p>
                     </div>
                   </article>
@@ -161,7 +179,7 @@ function Start() {
       {/* Så byggs en yta + kulörkoder */}
       <section className="container-page grid gap-14 py-20 sm:py-28 lg:grid-cols-[1fr_1fr] lg:gap-20">
         <Reveal>
-          <Heading className="text-4xl sm:text-5xl">
+          <Heading className="text-3xl sm:text-4xl lg:text-5xl">
             Det du ser är sista <Underline>skiktet</Underline>
           </Heading>
           <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">
@@ -210,7 +228,7 @@ function Start() {
       {HAR_PROJEKTBILDER && (
         <section className="container-page pb-20 sm:pb-28">
           <Reveal>
-            <Heading className="max-w-2xl text-4xl sm:text-5xl">
+            <Heading className="max-w-2xl text-3xl sm:text-4xl lg:text-5xl">
               Utfört <Underline>arbete</Underline>
             </Heading>
           </Reveal>
@@ -224,9 +242,9 @@ function Start() {
       {FORETAG.fskatt && (
         <section className="container-page pb-4">
           <Reveal>
-            <div className="grid gap-8 rounded-lg border border-foreground p-8 sm:p-12 lg:grid-cols-[1fr_auto] lg:items-center">
+            <div className="grid gap-8 rounded-lg border border-foreground p-6 sm:p-12 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <Heading className="max-w-xl text-3xl sm:text-4xl">
+                <Heading className="max-w-xl text-2xl sm:text-3xl">
                   ROT-avdrag direkt på <Underline>fakturan</Underline>
                 </Heading>
                 <p className="mt-5 max-w-xl leading-relaxed text-muted-foreground">
