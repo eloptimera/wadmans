@@ -8,13 +8,12 @@ import { skickaOffert } from "@/lib/formular";
 export const Route = createFileRoute("/offert")({
   head: () => ({
     meta: [
-      { title: "Begär gratis offert – ReMAB AB" },
+      { title: `Begär gratis offert | ${FORETAG.namn}` },
       {
         name: "description",
-        content:
-          "Beskriv ditt måleriprojekt i Torslanda, på Hisingen eller i Göteborg och begär en gratis offert från ReMAB AB.",
+        content: `Beskriv ditt måleriprojekt i ${FORETAG.omrade} och begär en gratis offert från ${FORETAG.namn}.`,
       },
-      { property: "og:title", content: "Begär gratis offert – ReMAB AB" },
+      { property: "og:title", content: `Begär gratis offert | ${FORETAG.namn}` },
       {
         property: "og:description",
         content: "Berätta om ditt måleriprojekt och få en gratis offert.",
@@ -79,7 +78,7 @@ function Offert() {
   if (klart) {
     return (
       <section className="container-page py-28">
-        <div className="mx-auto max-w-xl rounded-3xl border border-line bg-card p-10 text-center">
+        <div className="mx-auto max-w-xl rounded-lg border border-border bg-card p-10 text-center">
           <p className="eyebrow">Tack!</p>
           <h1 className="mt-5 text-3xl">Din förfrågan är mottagen</h1>
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
@@ -98,8 +97,7 @@ function Offert() {
     <>
       <section className="container-page pt-16 pb-12 sm:pt-24">
         <Reveal>
-          <p className="eyebrow">Offertförfrågan</p>
-          <Heading as="h1" className="mt-6 max-w-2xl text-5xl sm:text-6xl">
+          <Heading as="h1" className=" max-w-2xl text-5xl sm:text-6xl">
             Berätta om ditt <Underline>projekt</Underline>
           </Heading>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground">
@@ -112,7 +110,7 @@ function Offert() {
         <Reveal>
           <form
             onSubmit={onSubmit}
-            className="grid max-w-3xl gap-6 rounded-3xl border border-line bg-card p-8 sm:p-10"
+            className="grid max-w-3xl gap-6 rounded-lg border border-border bg-card p-8 sm:p-10"
           >
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
@@ -147,10 +145,10 @@ function Offert() {
                 {UPPDRAGSTYPER.map((t) => (
                   <label
                     key={t}
-                    className={`cursor-pointer rounded-full border-2 px-4 py-2 text-sm transition-colors duration-300 ${
+                    className={`cursor-pointer rounded-md border-2 px-4 py-2 text-sm transition-colors duration-300 ${
                       typer.includes(t)
                         ? "border-foreground bg-foreground text-background"
-                        : "border-line hover:border-lime hover:bg-lime"
+                        : "border-input hover:border-ultra hover:bg-muted"
                     }`}
                   >
                     <input
@@ -208,7 +206,7 @@ function Offert() {
                 accept="image/*"
                 multiple
                 onChange={(e) => setFiler(Array.from(e.target.files ?? []))}
-                className="field mt-2 file:mr-4 file:rounded-md file:border-0 file:bg-lime file:px-3 file:py-1.5 file:text-sm"
+                className="field mt-2 file:mr-4 file:rounded-md file:border-0 file:bg-muted file:px-3 file:py-1.5 file:text-sm"
               />
               {filer.length > 0 && (
                 <p className="mt-2 text-xs text-muted-foreground">{filer.length} bild(er) valda</p>
@@ -216,7 +214,7 @@ function Offert() {
             </div>
 
             <label className="flex items-start gap-3 text-sm text-muted-foreground">
-              <input type="checkbox" required className="mt-1 accent-foreground" />
+              <input type="checkbox" required className="mt-1 accent-[var(--ultra)]" />
               <span>
                 Jag samtycker till att {FORETAG.namn} lagrar mina uppgifter för att kunna besvara
                 min förfrågan. Läs mer i{" "}

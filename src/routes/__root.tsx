@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { FORETAG } from "@/lib/foretag";
 
 function NotFoundComponent() {
   return (
@@ -26,7 +27,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-base btn-primary"
           >
             Till startsidan
           </Link>
@@ -58,13 +59,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="btn-base btn-primary"
           >
             Försök igen
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="btn-base btn-outline"
           >
             Till startsidan
           </a>
@@ -79,48 +80,39 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ReMAB AB – Målare i Torslanda & Göteborg" },
+      { title: `${FORETAG.namn} | Målare i ${FORETAG.ort}` },
       {
         name: "description",
-        content:
-          "Professionellt måleri i Torslanda, på Hisingen och i Göteborg sedan 2006. Invändigt och utvändigt måleri, spackling, slipning och tapetsering. Begär en gratis offert.",
+        content: `Professionellt måleri i ${FORETAG.omrade}. Invändigt och utvändigt måleri, spackling, slipning och tapetsering. Begär en gratis offert.`,
       },
-      { property: "og:site_name", content: "ReMAB AB" },
+      { property: "og:site_name", content: FORETAG.namn },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "sv_SE" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "theme-color", content: "#f5f5f2" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-      { rel: "icon", href: "/favicon.ico?v=4", sizes: "any" },
-      { rel: "icon", href: "/favicon-32.png?v=4", type: "image/png", sizes: "32x32" },
-      { rel: "icon", href: "/icon-192.png?v=4", type: "image/png", sizes: "192x192" },
-      { rel: "apple-touch-icon", href: "/apple-touch-icon.png?v=4" },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
     scripts: [
       {
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          name: "ReMAB AB",
-          alternateName: "Renée måleri AB",
-          description:
-            "Målerifirma i Torslanda. Invändigt och utvändigt måleri, spackling, slipning och tapetsering i Torslanda, på Hisingen och i Göteborg.",
-          telephone: "+46705554472",
-          email: "info@remab.eu",
-          foundingDate: "2006",
+          "@type": "HousePainter",
+          name: FORETAG.namn,
+          description: `Målerifirma i ${FORETAG.ort}. Invändigt och utvändigt måleri, spackling, slipning och tapetsering.`,
+          telephone: FORETAG.telefonLank,
+          email: FORETAG.epost,
+          ...(FORETAG.aktivtSedan ? { foundingDate: String(FORETAG.aktivtSedan) } : {}),
           address: {
             "@type": "PostalAddress",
-            streetAddress: "Långholmen 17",
-            postalCode: "423 38",
-            addressLocality: "Torslanda",
+            streetAddress: FORETAG.adress,
+            addressLocality: FORETAG.ort,
             addressCountry: "SE",
           },
-          areaServed: ["Torslanda", "Hisingen", "Göteborg"],
+          areaServed: FORETAG.omrade,
         }),
       },
     ],

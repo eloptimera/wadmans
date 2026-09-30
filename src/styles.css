@@ -1,26 +1,31 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
-@import "@fontsource/bagel-fat-one/latin-400.css";
+@import "@fontsource-variable/familjen-grotesk/wght.css";
 @import "@fontsource-variable/dm-sans/wght.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-500.css";
 
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Designsystem – ReMAB AB
- * Svart och ljusgrönt hämtat från loggan. Grönt (#a4c43c) används som ytfärg och
- * understrykning med svart text ovanpå – aldrig som textfärg på vitt (för låg kontrast).
- * Rubriker: Bagel Fat One (fet, rundad). Brödtext: DM Sans.
+ * Designsystem: Wådmans Måleri
+ * Idé: sajten är en vägg som målas. Kulören besökaren väljer i hero-väggen följer med genom
+ * sidan, medan sajtens egna accent är ett enda pigment (ultramarin) som bara används för
+ * fokus, understrykningar och hover. Neutrala ytor är kallt kalkvita, text är nästan svart.
+ * Rubriker: Familjen Grotesk. Brödtext: DM Sans. Kulörnamn och koder: IBM Plex Mono.
+ * Formspråk: en enda radie (--radius) överallt, som en kulörbricka.
  */
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 8px);
-  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 6px);
-  --radius-2xl: calc(var(--radius) + 12px);
-  --font-display: "Bagel Fat One", "DM Sans Variable", system-ui, sans-serif;
+  --radius-xl: calc(var(--radius) + 2px);
+  --radius-2xl: calc(var(--radius) + 4px);
+  --font-display: "Familjen Grotesk Variable", "DM Sans Variable", system-ui, sans-serif;
   --font-sans: "DM Sans Variable", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -40,42 +45,78 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-sand: var(--sand);
-  --color-tint: var(--tint);
   --color-line: var(--line);
-  --color-lime: var(--lime);
+  --color-ultra: var(--ultra);
+  --color-on-ultra: var(--on-ultra);
+  --color-closing: var(--closing);
+  --color-closing-foreground: var(--closing-foreground);
 }
 
 :root {
-  --radius: 1.5rem;
-  --lime: #a4c43c;
-  --background: oklch(0.985 0.004 110);
-  --foreground: oklch(0.18 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0 0);
-  --primary: oklch(0.18 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.955 0.01 115);
-  --secondary-foreground: oklch(0.18 0 0);
-  --muted: oklch(0.955 0.01 115);
-  --muted-foreground: oklch(0.42 0 0);
-  --accent: var(--lime);
-  --accent-foreground: oklch(0.18 0 0);
-  --destructive: oklch(0.5 0.2 27);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.88 0.005 110);
-  --input: oklch(0.88 0.005 110);
-  --ring: oklch(0.18 0 0);
-  --sand: oklch(0.955 0.03 122);
-  --tint: oklch(0.955 0.03 122);
-  --line: oklch(0.86 0.005 110);
+  --radius: 0.375rem;
+  --ultra: #3d4fd1;
+  --on-ultra: #fbfbf9;
+  --background: #f5f5f2;
+  --foreground: #101418;
+  --card: #fbfbf9;
+  --card-foreground: #101418;
+  --popover: #fbfbf9;
+  --popover-foreground: #101418;
+  --primary: #101418;
+  --primary-foreground: #f5f5f2;
+  --secondary: #eceee9;
+  --secondary-foreground: #101418;
+  --muted: #eceee9;
+  --muted-foreground: #4f5a63;
+  --accent: #eceee9;
+  --accent-foreground: #101418;
+  --destructive: #a12d2d;
+  --destructive-foreground: #fbfbf9;
+  --border: rgba(16, 20, 24, 0.14);
+  --input: rgba(16, 20, 24, 0.5);
+  --ring: #101418;
+  --line: rgba(16, 20, 24, 0.5);
+  --closing: #101418;
+  --closing-foreground: #f1f2ee;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ultra: #9aa8ff;
+    --on-ultra: #101418;
+    --background: #0f1418;
+    --foreground: #eceeea;
+    --card: #151c22;
+    --card-foreground: #eceeea;
+    --popover: #151c22;
+    --popover-foreground: #eceeea;
+    --primary: #eceeea;
+    --primary-foreground: #0f1418;
+    --secondary: #1a232a;
+    --secondary-foreground: #eceeea;
+    --muted: #1a232a;
+    --muted-foreground: #9ba6ae;
+    --accent: #1a232a;
+    --accent-foreground: #eceeea;
+    --destructive: #ff8f8f;
+    --destructive-foreground: #0f1418;
+    --border: rgba(236, 238, 234, 0.16);
+    --input: rgba(236, 238, 234, 0.55);
+    --ring: #eceeea;
+    --line: rgba(236, 238, 234, 0.55);
+    --closing: #080b0e;
+    --closing-foreground: #eceeea;
+    color-scheme: dark;
+  }
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -90,9 +131,9 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 400;
-    line-height: 1.05;
-    letter-spacing: 0;
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.03em;
     text-wrap: balance;
     overflow-wrap: break-word;
   }
@@ -102,7 +143,7 @@
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-foreground);
+    outline: 3px solid var(--color-ring);
     outline-offset: 3px;
   }
 }
@@ -110,24 +151,30 @@
 @utility container-page {
   width: 100%;
   margin-inline: auto;
-  max-width: 78rem;
-  padding-inline: 1.5rem;
+  max-width: 80rem;
+  padding-inline: clamp(1rem, 4vw, 2.5rem);
 }
 
 @utility eyebrow {
+  font-family: var(--font-mono);
   font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-muted-foreground);
 }
 
-/* Understrykning i ljusgrönt – en riktig text-underline, så texten ligger orörd ovanpå. */
-@utility ul-lime {
+@utility mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* Understrykning i pigmentfärg. En riktig text-underline, så texten ligger orörd ovanpå. */
+@utility ul-paint {
   text-decoration-line: underline;
-  text-decoration-color: var(--lime);
-  text-decoration-thickness: 0.14em;
-  text-underline-offset: 0.14em;
+  text-decoration-color: var(--ultra);
+  text-decoration-thickness: 0.09em;
+  text-underline-offset: 0.12em;
   text-decoration-skip-ink: none;
 }
 
@@ -135,18 +182,20 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  border-radius: 9999px;
-  padding: 0.95rem 1.8rem;
-  font-size: 0.95rem;
-  font-weight: 700;
+  gap: 0.6rem;
+  min-height: 3rem;
+  border-radius: var(--radius);
+  padding: 0.85rem 1.5rem;
+  font-size: 0.97rem;
+  font-weight: 600;
+  white-space: nowrap;
   transition:
-    background-color 250ms ease,
-    color 250ms ease,
-    border-color 250ms ease,
-    transform 250ms ease;
-  &:hover {
-    transform: translateY(-2px);
+    background-color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    color 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+  &:active {
+    transform: translateY(1px) scale(0.98);
   }
 }
 
@@ -154,41 +203,72 @@
   background-color: var(--color-primary);
   color: var(--color-primary-foreground);
   &:hover {
-    background-color: var(--lime);
-    color: var(--color-foreground);
-  }
-}
-
-@utility btn-lime {
-  background-color: var(--lime);
-  color: var(--color-foreground);
-  &:hover {
-    background-color: var(--color-foreground);
-    color: var(--color-background);
+    background-color: var(--ultra);
+    color: var(--on-ultra);
   }
 }
 
 @utility btn-outline {
-  border: 2px solid var(--color-foreground);
   color: var(--color-foreground);
+  box-shadow: inset 0 0 0 1.5px var(--line);
   &:hover {
-    background-color: var(--lime);
-    border-color: var(--lime);
+    box-shadow: inset 0 0 0 1.5px var(--color-foreground);
+    background-color: var(--color-muted);
+  }
+}
+
+@utility btn-inverse {
+  background-color: var(--closing-foreground);
+  color: var(--closing);
+  &:hover {
+    background-color: var(--ultra);
+    color: var(--on-ultra);
+  }
+}
+
+@utility btn-inverse-outline {
+  color: var(--closing-foreground);
+  box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--closing-foreground) 55%, transparent);
+  &:hover {
+    box-shadow: inset 0 0 0 1.5px var(--closing-foreground);
   }
 }
 
 @utility field {
   width: 100%;
+  min-height: 3rem;
   background-color: var(--color-card);
-  border: 2px solid var(--color-line);
-  border-radius: 1rem;
+  border: 1.5px solid var(--color-input);
+  border-radius: var(--radius);
   padding: 0.8rem 1rem;
   font-size: 1rem;
   color: var(--color-foreground);
-  transition: border-color 200ms ease;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+  &::placeholder {
+    color: var(--color-muted-foreground);
+  }
   &:focus {
     outline: none;
     border-color: var(--color-foreground);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--ultra) 35%, transparent);
+  }
+}
+
+/* Textur som tar bort den sterila digitala ytan. Ligger som fast, klickgenomsläpplig pseudo-yta. */
+@utility grain {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.14;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .5  0 0 0 0 .5  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
   }
 }
 
@@ -205,39 +285,34 @@
   transform: none;
 }
 
-/* Ljusgrön yta som tonas mjukt in och ut mot vitt (inga hårda kanter). */
-@utility bg-fade-tint {
-  background-image: linear-gradient(
-    to bottom,
-    var(--background),
-    var(--tint) 22%,
-    var(--tint) 78%,
-    var(--background)
-  );
-}
-
-/* Rullande textband */
-@keyframes marquee {
+/* Rollern: ny kulör dras över väggen från vänster. */
+@keyframes rulla {
   from {
-    transform: translateX(0);
+    transform: translateX(-101%);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(0);
   }
 }
 
-@utility marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 32s linear infinite;
+@utility rulla {
+  animation: rulla 900ms cubic-bezier(0.65, 0.05, 0.25, 1) both;
+}
+
+@media (scripting: none) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   * {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
-  }
-  .marquee-track {
-    animation: none !important;
+    animation-delay: 0ms !important;
   }
 }

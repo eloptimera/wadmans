@@ -5,13 +5,12 @@ import { FORETAG } from "@/lib/foretag";
 export const Route = createFileRoute("/integritetspolicy")({
   head: () => ({
     meta: [
-      { title: "Integritetspolicy – ReMAB AB" },
+      { title: `Integritetspolicy | ${FORETAG.namn}` },
       {
         name: "description",
-        content:
-          "Så behandlar ReMAB AB dina personuppgifter när du kontaktar oss eller begär offert.",
+        content: `Så behandlar ${FORETAG.namn} dina personuppgifter när du kontaktar oss eller begär offert.`,
       },
-      { property: "og:title", content: "Integritetspolicy – ReMAB AB" },
+      { property: "og:title", content: `Integritetspolicy | ${FORETAG.namn}` },
       { property: "og:url", content: "/integritetspolicy" },
     ],
     links: [{ rel: "canonical", href: "/integritetspolicy" }],
@@ -33,8 +32,7 @@ function Sektion({ titel, children }: { titel: string; children: React.ReactNode
 function Integritetspolicy() {
   return (
     <article className="container-page max-w-3xl pt-16 pb-8 sm:pt-24">
-      <p className="eyebrow">Integritetspolicy</p>
-      <Heading as="h1" className="mt-6 text-4xl sm:text-5xl">
+      <Heading as="h1" className="text-4xl sm:text-5xl">
         Så hanterar vi dina personuppgifter
       </Heading>
       <p className="mt-6 text-base leading-relaxed text-muted-foreground">

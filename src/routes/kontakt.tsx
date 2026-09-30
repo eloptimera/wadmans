@@ -8,16 +8,15 @@ import { skickaKontakt } from "@/lib/formular";
 export const Route = createFileRoute("/kontakt")({
   head: () => ({
     meta: [
-      { title: "Kontakt – ReMAB AB i Torslanda" },
+      { title: `Kontakt | ${FORETAG.namn}` },
       {
         name: "description",
-        content:
-          "Ring, mejla eller skicka ett meddelande till ReMAB AB i Torslanda. Telefon, e-post, adress och karta.",
+        content: `Ring, mejla eller skicka ett meddelande till ${FORETAG.namn} i ${FORETAG.ort}. Telefon, e-post, adress och karta.`,
       },
-      { property: "og:title", content: "Kontakt – ReMAB AB" },
+      { property: "og:title", content: `Kontakt | ${FORETAG.namn}` },
       {
         property: "og:description",
-        content: "Telefon, e-post och adress till ReMAB AB i Torslanda.",
+        content: `Telefon, e-post och adress till ${FORETAG.namn}.`,
       },
       { property: "og:url", content: "/kontakt" },
     ],
@@ -55,13 +54,8 @@ function Kontakt() {
     <>
       <section className="container-page pt-16 pb-12 sm:pt-24">
         <Reveal>
-          <p className="eyebrow">Kontakt</p>
-          <Heading
-            as="h1"
-
-            className="mt-6 max-w-2xl text-4xl leading-[1.12] sm:text-5xl"
-          >
-            Hör av dig – vi <Underline>återkommer</Underline>
+          <Heading as="h1" className="max-w-2xl text-4xl leading-[1.12] sm:text-5xl">
+            Hör av dig, vi <Underline>återkommer</Underline>
           </Heading>
         </Reveal>
       </section>
@@ -74,7 +68,7 @@ function Kontakt() {
               <dd className="mt-2">
                 <a
                   href={`tel:${FORETAG.telefonLank}`}
-                  className="font-display text-2xl hover:opacity-70"
+                  className="font-display text-2xl hover:text-ultra"
                 >
                   {FORETAG.telefon}
                 </a>
@@ -83,7 +77,7 @@ function Kontakt() {
             <div>
               <dt className="eyebrow">E-post</dt>
               <dd className="mt-2">
-                <a href={`mailto:${FORETAG.epost}`} className="hover:opacity-70">
+                <a href={`mailto:${FORETAG.epost}`} className="hover:text-ultra">
                   {FORETAG.epost}
                 </a>
               </dd>
@@ -105,14 +99,14 @@ function Kontakt() {
 
         <Reveal delay={120}>
           {klart ? (
-            <div className="rounded-3xl border border-line bg-card p-8">
+            <div className="rounded-lg border border-border bg-card p-8">
               <h2 className="text-2xl">Tack för ditt meddelande</h2>
               <p className="mt-4 text-sm text-muted-foreground">Vi återkommer så snart vi kan.</p>
             </div>
           ) : (
             <form
               onSubmit={onSubmit}
-              className="grid gap-5 rounded-3xl border border-line bg-card p-8"
+              className="grid gap-5 rounded-lg border border-border bg-card p-8"
             >
               <h2 className="text-2xl">Skicka ett meddelande</h2>
               <div>
@@ -159,10 +153,10 @@ function Kontakt() {
       <section className="container-page pb-20">
         <Reveal>
           <iframe
-            title="Karta över Torslanda och Hisingen"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=11.62%2C57.66%2C11.92%2C57.79&layer=mapnik"
+            title={`Karta över ${FORETAG.omrade}`}
+            src={`https://www.openstreetmap.org/export/embed.html?bbox=${encodeURIComponent(FORETAG.kartaBbox)}&layer=mapnik`}
             loading="lazy"
-            className="h-[380px] w-full rounded-3xl border border-line"
+            className="h-[380px] w-full rounded-lg border border-border"
           />
         </Reveal>
       </section>
