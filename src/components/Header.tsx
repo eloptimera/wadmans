@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Phone } from "lucide-react";
 import { useEffect, useState } from "react";
 import { FORETAG } from "@/lib/foretag";
-import { Varumarke } from "@/components/Varumarke";
+import { Logotyp } from "@/components/Logotyp";
 
 const LANKAR = [
   { to: "/", label: "Hem" },
@@ -28,9 +28,9 @@ export function Header() {
   return (
     <header className="sticky top-3 z-50 px-3">
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex h-16 items-center justify-between gap-6 rounded-full border border-border bg-background px-4 backdrop-blur-xl sm:px-6">
+        <div className="flex h-[4.5rem] items-center justify-between gap-6 rounded-full border border-border bg-background px-4 backdrop-blur-xl sm:px-6">
           <Link to="/" aria-label={`${FORETAG.namn}, startsida`} onClick={() => setOppen(false)}>
-            <Varumarke />
+            <Logotyp className="size-14" />
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Huvudmeny">

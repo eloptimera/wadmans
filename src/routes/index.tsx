@@ -3,11 +3,11 @@ import { ArrowUpRight } from "lucide-react";
 import { Heading, Underline } from "@/components/Heading";
 import { Reveal } from "@/components/Reveal";
 import { Kulorvagg } from "@/components/Kulorvagg";
-import { Logotyp } from "@/components/Logotyp";
 import { Marquee } from "@/components/Marquee";
-import { Penselring } from "@/components/Penselring";
 import { Galleri, HAR_PROJEKTBILDER } from "@/components/Galleri";
 import { FORETAG } from "@/lib/foretag";
+import rum from "@/assets/hero/rum.jpg";
+import pensel from "@/assets/hero/pensel.jpg";
 import { kulorAt, useValdKulor } from "@/lib/kulorer";
 
 export const Route = createFileRoute("/")({
@@ -65,41 +65,78 @@ function Start() {
 
   return (
     <>
-      {/* Hero: mörk öppning, staplad rubrik, kulörvägg och logotyp */}
-      <section
-        className="relative -mt-[4.75rem] overflow-hidden bg-closing pt-36 text-closing-foreground"
-        style={{ "--ring-a": "var(--closing-foreground)", "--ring-b": "var(--ultra-soft)" } as React.CSSProperties}
-      >
-        <div className="container-page grid items-center gap-12 pb-20 lg:grid-cols-[15rem_1fr_11rem] lg:gap-10 lg:pb-24">
-          <div className="order-2 lg:order-1">
-            <Kulorvagg />
-          </div>
-
-          <div className="order-1 lg:order-2">
-            <h1 className="text-[clamp(1.85rem,5vw,4.6rem)] leading-[1.02] font-extrabold">
-              <span className="block">Professionellt</span>
-              <span className="block text-ultra-soft lg:pl-[12%]">måleri</span>
-              <span className="block">i{"\u00a0"}{FORETAG.ort}</span>
+      {/* Hero: mörk öppning, jättelik rubrik som glider in från höger, bilder på båda sidor */}
+      <section className="relative -mt-[5.25rem] overflow-hidden bg-closing pt-36 text-closing-foreground">
+        <div className="container-page relative pb-16 lg:min-h-[34rem] lg:pb-24">
+          <div className="relative z-10">
+            <h1
+              className="text-[clamp(1.9rem,8.6vw,3.25rem)] leading-[1.02] font-extrabold text-orange sm:text-[clamp(3.25rem,8vw,6rem)] lg:text-[clamp(3.5rem,6vw,5.75rem)]"
+              style={{ textShadow: "0 2px 28px rgba(10,16,29,0.65)" }}
+            >
+              <span className="glid block whitespace-nowrap lg:ml-[18%]">Professionellt</span>
+              <span className="glid ml-[10%] block whitespace-nowrap lg:ml-[10%]" style={{ animationDelay: "140ms" }}>
+                måleri
+              </span>
+              <span className="glid ml-[4%] block whitespace-nowrap lg:ml-[34%]" style={{ animationDelay: "280ms" }}>
+                i{"\u00a0"}
+                {FORETAG.ort}
+              </span>
             </h1>
-            <p className="mt-8 max-w-lg text-lg leading-relaxed text-closing-foreground/80">
-              Vi är ett passionerat team av erfarna målare som sätter dina unika visioner i fokus.
-            </p>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <Link to="/offert" className="btn-base btn-inverse">
-                Begär en gratis offert
-              </Link>
-              <a href={`tel:${FORETAG.telefonLank}`} className="btn-base btn-inverse-outline">
-                Ring {FORETAG.telefon}
-              </a>
+
+            <div className="mt-10 max-w-md lg:ml-[30%]">
+              <p className="text-lg leading-relaxed text-closing-foreground/80">
+                Vi är ett passionerat team av erfarna målare som sätter dina unika visioner i fokus.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <Link to="/offert" className="btn-base btn-orange">
+                  Begär en gratis offert
+                </Link>
+                <a
+                  href={`tel:${FORETAG.telefonLank}`}
+                  className="font-display text-xs font-bold tracking-[0.14em] uppercase underline decoration-orange decoration-[0.12em] underline-offset-[0.5em]"
+                >
+                  Ring {FORETAG.telefon}
+                </a>
+              </div>
             </div>
           </div>
 
-          <div className="relative order-3 hidden self-end lg:block">
-            <Penselring className="absolute -inset-6 size-[calc(100%+3rem)] opacity-60" />
-            <Logotyp className="relative" />
+          <div className="mt-12 flex items-end gap-4 lg:mt-0 lg:block">
+            <img
+              src={rum}
+              alt="Nyspacklade väggar och tak i ett hus inför målning"
+              width={900}
+              height={1219}
+              fetchPriority="high"
+              className="aspect-[3/4] w-[58%] rounded-sm object-cover lg:absolute lg:top-0 lg:left-0 lg:w-[17rem]"
+            />
+            <img
+              src={pensel}
+              alt="Pensel som stryker grå färg på en vägg"
+              width={800}
+              height={838}
+              className="aspect-[4/3] w-[38%] rounded-sm object-cover lg:absolute lg:right-0 lg:bottom-32 lg:w-[15rem]"
+            />
           </div>
         </div>
         <Marquee items={TJANSTER.map((t) => t.titel)} />
+      </section>
+
+      {/* Kulörvägg */}
+      <section className="container-page grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_20rem] lg:gap-20">
+        <Reveal>
+          <Heading className="max-w-xl text-3xl sm:text-4xl lg:text-5xl">
+            Vilken kulör får din <Underline>vägg</Underline>?
+          </Heading>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
+            Prova en kulör och se hur rummet förändras. Valet följer med dig genom sidan.
+          </p>
+        </Reveal>
+        <Reveal delay={120}>
+          <div className="rounded-lg bg-closing p-4 text-closing-foreground">
+            <Kulorvagg />
+          </div>
+        </Reveal>
       </section>
 
       {/* Om företaget */}
