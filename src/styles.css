@@ -7,7 +7,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Designsystem: Wådmans Måleri
+ * Designsystem: Wadmans Måleri
  * Utgår från loggan: krämvit yta, marinblå text och ett rostrött penseldrag. Typografin är
  * versaler i en klassisk antikva (Cinzel) som i loggan, med Source Serif 4 för löptext.
  * Layouten hämtar sin energi från en referens: mörk öppning, staplade jättelika rubriker,
@@ -371,4 +371,15 @@
     animation-duration: 0.01ms !important;
     animation-delay: 0ms !important;
   }
+}
+
+/* Band med mjuka kanter: bakgrunden tonar in och ut i stället för att börja och sluta med en rak linje. */
+@utility band {
+  background: linear-gradient(
+    to bottom,
+    transparent 0,
+    var(--muted) 6rem,
+    var(--muted) calc(100% - 6rem),
+    transparent 100%
+  );
 }

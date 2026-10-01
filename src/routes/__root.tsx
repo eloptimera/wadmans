@@ -116,6 +116,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
             addressCountry: "SE",
           },
           areaServed: FORETAG.omrade,
+          ...(FORETAG.instagram ? { sameAs: [FORETAG.instagram] } : {}),
         }),
       },
     ],

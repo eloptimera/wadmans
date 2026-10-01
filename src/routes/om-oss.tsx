@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Heading, Underline } from "@/components/Heading";
+import { Grundare } from "@/components/Grundare";
+import { InstagramBand } from "@/components/Instagram";
 import { Reveal } from "@/components/Reveal";
 import { FORETAG } from "@/lib/foretag";
 import { kulorAt, useValdKulor } from "@/lib/kulorer";
@@ -26,16 +28,16 @@ export const Route = createFileRoute("/om-oss")({
 
 const VARDERINGAR = [
   {
-    titel: "Dina visioner i fokus",
-    text: "Vi lyssnar först. Din bild av resultatet är utgångspunkten för hela arbetet.",
+    titel: "Du bestämmer resultatet",
+    text: "Vi börjar med att lyssna på hur du vill ha det. Din bild av resultatet styr hela jobbet.",
   },
   {
-    titel: "Varje detalj är viktig",
-    text: "Precision i både underarbete och slutresultat, från första spackelstrykningen.",
+    titel: "Detaljerna räknas",
+    text: "Från första spackelstrykningen till sista penseldraget lägger vi tid på det som syns och det som inte syns.",
   },
   {
-    titel: "Varje kund värd det bästa",
-    text: "Ett personligt engagemang i varje projekt, stort som smått.",
+    titel: "Stora och små jobb",
+    text: "Ett enda rum eller en hel fasad, vi tar uppdraget på samma allvar.",
   },
 ] as const;
 
@@ -45,11 +47,19 @@ function OmOss() {
   const fakta: { rubrik: string; varde: string }[] = [
     { rubrik: "Företag", varde: FORETAG.namn },
     { rubrik: "Organisationsnummer", varde: FORETAG.orgnr },
-    ...(FORETAG.aktivtSedan ? [{ rubrik: "Aktiva sedan", varde: String(FORETAG.aktivtSedan) }] : []),
-    ...(FORETAG.vd ? [{ rubrik: "VD", varde: FORETAG.vd }] : []),
-    ...(FORETAG.fskatt
-      ? [{ rubrik: "Skatt", varde: "Registrerad för F-skatt, moms och arbetsgivaravgift" }]
+    ...(FORETAG.vd
+      ? [
+          {
+            rubrik: "Grundare och VD",
+            varde: `${FORETAG.vd}${FORETAG.erfarenhetAr ? `, ${FORETAG.erfarenhetAr} års erfarenhet i branschen` : ""}`,
+          },
+        ]
       : []),
+    ...(FORETAG.aktivtSedan ? [{ rubrik: "Aktiva sedan", varde: String(FORETAG.aktivtSedan) }] : []),
+    { rubrik: "Adress", varde: FORETAG.adress },
+    { rubrik: "Telefon", varde: FORETAG.telefon },
+    { rubrik: "E-post", varde: FORETAG.epost },
+    ...(FORETAG.fskatt ? [{ rubrik: "Skatt", varde: "Godkänd för F-skatt" }] : []),
     { rubrik: "Arbetsområde", varde: FORETAG.omrade },
   ];
 
@@ -58,18 +68,25 @@ function OmOss() {
       <section className="container-page pt-16 pb-16 sm:pt-24">
         <Reveal>
           <Heading as="h1" className="max-w-3xl text-3xl sm:text-5xl lg:text-6xl">
-            Erfarna målare som sätter dina <Underline>visioner</Underline> i fokus
+            {FORETAG.erfarenhetAr ? (
+              <>
+                Målare med <Underline>{FORETAG.erfarenhetAr} års</Underline> erfarenhet
+              </>
+            ) : (
+              <>
+                Målare i <Underline>{FORETAG.ort}</Underline>
+              </>
+            )}
           </Heading>
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            Vi är ett passionerat team av erfarna målare.{" "}
-            {FORETAG.aktivtSedan ? `Sedan ${FORETAG.aktivtSedan} har ` : ""}
-            {FORETAG.namn} {FORETAG.aktivtSedan ? "levererat" : "levererar"} högkvalitativa
-            måleriarbeten med stor precision och ett personligt engagemang i {FORETAG.omrade}.
+            {FORETAG.namn} är ett målerifirma i {FORETAG.ort}
+            {FORETAG.vd ? `, grundat av ${FORETAG.vd}` : ""}. Vi målar, spacklar och tapetserar
+            hos privatpersoner och fastighetsägare i {FORETAG.omrade}.
           </p>
         </Reveal>
       </section>
 
-      <section className="container-page grid gap-3 pb-20 md:grid-cols-3">
+      <section className="container-page grid gap-3 pb-12 md:grid-cols-3">
         {VARDERINGAR.map((v, i) => (
           <Reveal key={v.titel} delay={i * 100}>
             <article className="h-full rounded-lg border border-border bg-card p-8">
@@ -85,7 +102,9 @@ function OmOss() {
         ))}
       </section>
 
-      <section className="bg-muted py-20">
+      <Grundare />
+
+      <section className="band py-28 sm:py-32">
         <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
           <Reveal>
             <Heading className="text-3xl sm:text-4xl">Fakta om företaget</Heading>
@@ -103,7 +122,9 @@ function OmOss() {
         </div>
       </section>
 
-      <section className="container-page py-20 sm:py-28">
+      <InstagramBand />
+
+      <section className="container-page pb-12 sm:pb-20">
         <Reveal className="flex justify-center">
           <Link to="/offert" className="btn-base btn-primary px-10 py-5 text-lg">
             Begär en gratis offert

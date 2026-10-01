@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { FORETAG } from "@/lib/foretag";
 import { Underline } from "@/components/Heading";
+import { InstagramIkon } from "@/components/Instagram";
 import { Logotyp } from "@/components/Logotyp";
 import { Penselring } from "@/components/Penselring";
 
@@ -16,9 +17,11 @@ export function Footer() {
 
   return (
     <footer
-      className="relative mt-24 overflow-hidden bg-closing text-closing-foreground"
+      className="relative mt-12 overflow-hidden bg-closing text-closing-foreground"
       style={{ "--ring-a": "var(--closing-foreground)", "--ring-b": "var(--ultra-soft)" } as React.CSSProperties}
     >
+      {/* Mjuk tona från sidans ljusa yta in i sidfoten */}
+      <div aria-hidden="true" className="relative h-28 bg-gradient-to-b from-background to-closing" />
       <Penselring className="pointer-events-none absolute -top-16 -right-24 hidden size-[30rem] opacity-20 md:block" />
       {visaCta && (
         <div className="container-page relative pt-20 pb-16 sm:pt-28">
@@ -46,8 +49,10 @@ export function Footer() {
           </p>
           <p className="mt-3 max-w-xs text-sm leading-relaxed text-closing-foreground/75">
             Måleri i {FORETAG.ort}
-            {FORETAG.aktivtSedan ? `. Aktiva sedan ${FORETAG.aktivtSedan}.` : "."}
+            {FORETAG.erfarenhetAr ? `, med ${FORETAG.erfarenhetAr} års erfarenhet` : ""}
+            {FORETAG.aktivtSedan ? `. Aktiva sedan ${FORETAG.aktivtSedan}` : ""}.
           </p>
+          <InstagramIkon className="mt-6" />
         </div>
 
         <div>
@@ -65,6 +70,7 @@ export function Footer() {
             </li>
             <li>{FORETAG.adress}</li>
             <li>Org.nr {FORETAG.orgnr}</li>
+            {FORETAG.vd && <li>Grundare och VD: {FORETAG.vd}</li>}
           </ul>
         </div>
 

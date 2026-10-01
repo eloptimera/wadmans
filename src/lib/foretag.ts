@@ -1,9 +1,8 @@
 // Enda källan till företagsuppgifter. Allt på sajten (sidfot, kontakt, integritetspolicy,
 // meta-data, strukturerad data) läser härifrån.
 //
-// VIKTIGT: uppgifterna nedan är platshållare för Wådmans Måleri. Byt ut dem mot verkliga
-// uppgifter innan sajten publiceras (se README, avsnittet "Anpassa för en kund").
-// Fält som sätts till null visas inte på sajten.
+// Uppgifterna gäller Wadmans Måleri AB. Ska sajten återanvändas för en annan kund byter man
+// värdena här (se README, avsnittet "Anpassa för en kund"). Fält som sätts till null visas inte.
 export type Foretag = {
   namn: string;
   kortnamn: string;
@@ -12,8 +11,14 @@ export type Foretag = {
   omrade: string;
   /** Årtal företaget startade, eller null om det inte ska visas. */
   aktivtSedan: number | null;
-  /** Verkställande direktör, eller null om det inte ska visas. */
+  /** Grundare och verkställande direktör, eller null om det inte ska visas. */
   vd: string | null;
+  /** Antal års erfarenhet i branschen, eller null om det inte ska visas. */
+  erfarenhetAr: number | null;
+  /** Länk till företagets Instagram, eller null om det inte ska visas. */
+  instagram: string | null;
+  /** Instagram-namnet som visas i text. */
+  instagramNamn: string | null;
   telefon: string;
   telefonLank: string;
   epost: string;
@@ -26,18 +31,21 @@ export type Foretag = {
 };
 
 export const FORETAG: Foretag = {
-  namn: "Wådmans Måleri AB",
-  kortnamn: "Wådmans",
+  namn: "Wadmans Måleri AB",
+  kortnamn: "Wadmans",
   undertitel: "Måleri AB",
-  ort: "Göteborg",
-  omrade: "Göteborg med omnejd",
+  ort: "Örebro",
+  omrade: "Örebro med omnejd",
   aktivtSedan: null,
-  vd: null,
-  telefon: "000-000 00 00",
-  telefonLank: "+46000000000",
-  epost: "info@example.com",
-  adress: "Gatuadress 1, 000 00 Göteborg",
-  orgnr: "000000-0000",
+  vd: "Henrik Daniel Wadman",
+  erfarenhetAr: 25,
+  instagram: "https://www.instagram.com/wadmans_maleriab/",
+  instagramNamn: "@wadmans_maleriab",
+  telefon: "070-496 88 87",
+  telefonLank: "+46704968887",
+  epost: "danielwadman@hotmail.com",
+  adress: "Åsen 365, 705 95 Örebro",
+  orgnr: "559530-7231",
   fskatt: true,
-  kartaBbox: "11.80,57.62,12.15,57.80",
+  kartaBbox: "15.05,59.20,15.40,59.35",
 };

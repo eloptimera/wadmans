@@ -47,7 +47,7 @@ function Rot() {
         </Reveal>
       </section>
 
-      <section className="bg-muted py-20">
+      <section className="band py-28">
         <div className="container-page grid gap-12 lg:grid-cols-2 lg:gap-20">
           <Reveal>
             <h2 className="text-3xl sm:text-4xl">Räkna ut din kostnad efter avdrag</h2>

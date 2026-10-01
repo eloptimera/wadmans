@@ -6,9 +6,9 @@ import { Logotyp } from "@/components/Logotyp";
 
 const LANKAR = [
   { to: "/", label: "Hem" },
-  { to: "/om-oss", label: "Om oss" },
   { to: "/rot", label: "ROT-avdrag" },
   { to: "/kontakt", label: "Kontakt" },
+  { to: "/om-oss", label: "Om oss" },
 ] as const;
 
 const LANK_KLASS =
@@ -17,6 +17,30 @@ const LANK_AKTIV = "text-foreground decoration-ultra";
 
 export function Header() {
   const [oppen, setOppen] = useState(false);
+  /* Över hero (mörk yta) ska ingen ljus tona ligga bakom menyn. Sidor utan hero har den alltid. */
+  const [overHero, setOverHero] = useState(false);
+
+  useEffect(() => {
+    let vantar = false;
+    const kolla = () => {
+      vantar = false;
+      const hero = document.getElementById("hero");
+      setOverHero(!!hero && hero.getBoundingClientRect().bottom > 100);
+    };
+    const paScroll = () => {
+      if (!vantar) {
+        vantar = true;
+        requestAnimationFrame(kolla);
+      }
+    };
+    kolla();
+    window.addEventListener("scroll", paScroll, { passive: true });
+    window.addEventListener("resize", paScroll);
+    return () => {
+      window.removeEventListener("scroll", paScroll);
+      window.removeEventListener("resize", paScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (!oppen) return;
@@ -26,7 +50,13 @@ export function Header() {
   }, [oppen]);
 
   return (
-    <header className="sticky top-3 z-50 px-3">
+    <header className="sticky top-0 z-50 px-3 pt-3">
+      {/* Mjuk tona bakom menyn så att innehåll som rullar förbi försvinner i stället för att klippas. */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 backdrop-blur-md transition-opacity duration-500 [mask-image:linear-gradient(to_bottom,black_45%,transparent)] ${overHero ? "opacity-0" : "opacity-100"}`}
+        style={{ background: "linear-gradient(to bottom, var(--background) 35%, transparent)" }}
+      />
       <div className="relative mx-auto max-w-7xl">
         <div className="flex h-[4.5rem] items-center justify-between gap-6 rounded-full border border-border bg-background px-4 backdrop-blur-xl sm:px-6">
           <Link to="/" aria-label={`${FORETAG.namn}, startsida`} onClick={() => setOppen(false)}>

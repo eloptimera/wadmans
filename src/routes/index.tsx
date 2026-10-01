@@ -3,12 +3,14 @@ import { ArrowUpRight } from "lucide-react";
 import { Heading, Underline } from "@/components/Heading";
 import { Reveal } from "@/components/Reveal";
 import { Kulorvagg } from "@/components/Kulorvagg";
-import { Marquee } from "@/components/Marquee";
 import { Galleri, HAR_PROJEKTBILDER } from "@/components/Galleri";
+import { Grundare } from "@/components/Grundare";
+import { InstagramBand } from "@/components/Instagram";
+import { Marquee } from "@/components/Marquee";
 import { FORETAG } from "@/lib/foretag";
+import { kulorAt, useValdKulor } from "@/lib/kulorer";
 import rum from "@/assets/hero/rum.jpg";
 import pensel from "@/assets/hero/pensel.jpg";
-import { kulorAt, useValdKulor } from "@/lib/kulorer";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,12 +18,12 @@ export const Route = createFileRoute("/")({
       { title: `Målare i ${FORETAG.ort} | ${FORETAG.namn}` },
       {
         name: "description",
-        content: `Professionellt måleri i ${FORETAG.omrade}. Invändigt och utvändigt måleri, spackling, slipning och tapetsering. Begär en gratis offert.`,
+        content: `Målare i ${FORETAG.omrade}. Invändigt och utvändigt måleri, spackling, slipning och tapetsering. Begär en gratis offert.`,
       },
       { property: "og:title", content: `Målare i ${FORETAG.ort} | ${FORETAG.namn}` },
       {
         property: "og:description",
-        content: "Erfarna målare med precision och personligt engagemang. Begär en gratis offert.",
+        content: "Måleri för privatpersoner och fastighetsägare. Begär en gratis offert.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -31,61 +33,78 @@ export const Route = createFileRoute("/")({
 });
 
 const TJANSTER = [
-  { titel: "Invändigt måleri", tagg: "Inomhus", text: "Målning av väggar, tak, kök och snickerier." },
-  { titel: "Spackling & slipning", tagg: "Underarbete", text: "Noggrant underarbete för jämna och hållbara resultat." },
-  { titel: "Tapetsering", tagg: "Inomhus", text: "Professionell uppsättning av mönstrade och enfärgade tapeter." },
+  { titel: "Invändigt måleri", tagg: "Inomhus", text: "Väggar, tak, kök och snickerier." },
+  {
+    titel: "Spackling & slipning",
+    tagg: "Underarbete",
+    text: "Underarbetet som gör att färgen ser bra ut och håller.",
+  },
+  { titel: "Tapetsering", tagg: "Inomhus", text: "Mönstrade och enfärgade tapeter." },
   {
     titel: "Utvändigt måleri",
     tagg: "Utomhus",
-    text: "Fasadmålning av villor och fastigheter anpassat efter väder och material.",
+    text: "Fasader på villor och fastigheter, med färg och metod som passar väder och material.",
   },
 ] as const;
 
 const SKIKT = [
   {
     namn: "Underlaget",
-    text: "Vi går igenom väggen, rensar löst material och lagar sprickor och hål.",
+    text: "Vi går igenom väggen, tar bort löst material och lagar sprickor och hål.",
   },
   {
     namn: "Spackel och slip",
-    text: "Jämna ytor kräver tid. Här avgörs hur släta väggarna ser ut i strilande ljus.",
+    text: "Det här tar tid, och det är här det avgörs hur slät väggen blir när solen ligger an snett.",
   },
   {
     namn: "Grundning",
-    text: "Grunden binder underlaget och gör att slutfärgen får samma lyster över hela väggen.",
+    text: "Grunden binder underlaget så att färgen får samma lyster över hela väggen.",
   },
   {
     namn: "Täckande strykningar",
-    text: "Kulören läggs på i tunna, jämna skikt tills den täcker och håller.",
+    text: "Kulören läggs på i tunna, jämna lager tills den täcker.",
   },
 ] as const;
 
 function Start() {
   const kulor = kulorAt(useValdKulor());
 
+  const rader: string[] = FORETAG.erfarenhetAr
+    ? ["Målare", `i ${FORETAG.ort}`, `med ${FORETAG.erfarenhetAr} års`, "erfarenhet"]
+    : ["Målare", `i ${FORETAG.ort}`];
+  const forskjutning = ["lg:ml-[14%]", "lg:ml-[4%]", "lg:ml-[26%]", "lg:ml-[10%]"];
+  const mobilForskjutning = ["ml-0", "ml-[8%]", "ml-[3%]", "ml-[12%]"];
+
   return (
     <>
-      {/* Hero: mörk öppning, jättelik rubrik som glider in från höger, bilder på båda sidor */}
-      <section className="relative -mt-[5.25rem] overflow-hidden bg-closing pt-36 text-closing-foreground">
-        <div className="container-page relative pb-16 lg:min-h-[34rem] lg:pb-24">
+      {/* Hero */}
+      <section
+        id="hero"
+        className="relative -mt-[5.25rem] overflow-hidden bg-closing pt-36 text-closing-foreground"
+      >
+        <div className="container-page relative pb-16 lg:min-h-[38rem] lg:pb-24">
           <div className="relative z-10">
             <h1
               className="text-[clamp(1.9rem,8.6vw,3.25rem)] leading-[1.02] font-extrabold text-orange sm:text-[clamp(3.25rem,8vw,6rem)] lg:text-[clamp(3.5rem,6vw,5.75rem)]"
               style={{ textShadow: "0 2px 28px rgba(10,16,29,0.65)" }}
             >
-              <span className="glid block whitespace-nowrap lg:ml-[18%]">Professionellt</span>
-              <span className="glid ml-[10%] block whitespace-nowrap lg:ml-[10%]" style={{ animationDelay: "140ms" }}>
-                måleri
-              </span>
-              <span className="glid ml-[4%] block whitespace-nowrap lg:ml-[34%]" style={{ animationDelay: "280ms" }}>
-                i{"\u00a0"}
-                {FORETAG.ort}
-              </span>
+              {rader.map((r, i) => (
+                <span
+                  key={r}
+                  className={`glid block whitespace-nowrap ${mobilForskjutning[i]} ${forskjutning[i]}`}
+                  style={{ animationDelay: `${i * 140}ms` }}
+                >
+                  {r}
+                </span>
+              ))}
             </h1>
 
             <div className="mt-10 max-w-md lg:ml-[30%]">
-              <p className="text-lg leading-relaxed text-closing-foreground/80">
-                Vi är ett passionerat team av erfarna målare som sätter dina unika visioner i fokus.
+              <p className="text-lg leading-relaxed text-closing-foreground/85">
+                {FORETAG.vd ? `${FORETAG.vd} och ` : ""}
+                {FORETAG.namn} målar, spacklar och tapetserar hos privatpersoner och
+                fastighetsägare i {FORETAG.omrade}. Berätta vad du vill ha gjort, så återkommer vi
+                med en offert.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <Link to="/offert" className="btn-base btn-orange">
@@ -120,16 +139,19 @@ function Start() {
           </div>
         </div>
         <Marquee items={TJANSTER.map((t) => t.titel)} />
+        {/* Hero tonar mjukt över i sidans ljusa yta */}
+        <div aria-hidden="true" className="h-32 bg-gradient-to-b from-closing to-background" />
       </section>
 
       {/* Kulörvägg */}
-      <section className="container-page grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1fr_20rem] lg:gap-20">
+      <section className="container-page grid items-center gap-12 py-12 sm:py-20 lg:grid-cols-[1fr_20rem] lg:gap-20">
         <Reveal>
           <Heading className="max-w-xl text-3xl sm:text-4xl lg:text-5xl">
             Vilken kulör får din <Underline>vägg</Underline>?
           </Heading>
           <p className="mt-6 max-w-md text-lg leading-relaxed text-muted-foreground">
-            Prova en kulör och se hur rummet förändras. Valet följer med dig genom sidan.
+            Prova några kulörer och se hur väggen ändras. Vill du ha hjälp att välja får du gärna
+            höra av dig, så tar vi det därifrån.
           </p>
         </Reveal>
         <Reveal delay={120}>
@@ -140,17 +162,16 @@ function Start() {
       </section>
 
       {/* Om företaget */}
-      <section className="container-page grid gap-10 py-20 sm:py-28 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+      <section className="container-page grid gap-10 py-16 sm:py-24 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
         <Reveal>
           <Heading className="max-w-2xl text-3xl sm:text-4xl lg:text-5xl">
-            Varje projekt är en <Underline>prioritet</Underline>
+            Stora och små jobb, samma <Underline>noggrannhet</Underline>
           </Heading>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            {FORETAG.aktivtSedan ? `Sedan ${FORETAG.aktivtSedan} har ` : ""}
-            {FORETAG.namn} {FORETAG.aktivtSedan ? "levererat" : "levererar"} högkvalitativa
-            måleriarbeten med stor precision och ett personligt engagemang i{" "}
-            {FORETAG.omrade}. För oss är varje projekt en prioritet, varje detalj viktig och varje
-            kund värd det allra bästa.
+            {FORETAG.namn} drivs av {FORETAG.vd ?? "oss"}
+            {FORETAG.erfarenhetAr ? `, som har ${FORETAG.erfarenhetAr} års erfarenhet av måleri` : ""}
+            . Vi arbetar hos privatpersoner och fastighetsägare i {FORETAG.omrade}, och vi lägger
+            lika mycket tid på underarbetet som på den sista strykningen.
           </p>
           <Link
             to="/om-oss"
@@ -163,12 +184,17 @@ function Start() {
 
         <Reveal delay={120}>
           <dl className="grid gap-px overflow-hidden rounded-lg border border-border bg-border">
-            {FORETAG.aktivtSedan && (
+            {FORETAG.erfarenhetAr ? (
+              <div className="bg-card p-6">
+                <dt className="eyebrow">Erfarenhet</dt>
+                <dd className="mono mt-3 text-5xl">{FORETAG.erfarenhetAr} år</dd>
+              </div>
+            ) : FORETAG.aktivtSedan ? (
               <div className="bg-card p-6">
                 <dt className="eyebrow">Aktiva sedan</dt>
                 <dd className="mono mt-3 text-5xl">{FORETAG.aktivtSedan}</dd>
               </div>
-            )}
+            ) : null}
             <div className="bg-card p-6">
               <dt className="eyebrow">Arbetsområde</dt>
               <dd className="mt-3 font-display text-2xl leading-tight sm:text-3xl">
@@ -180,18 +206,18 @@ function Start() {
       </section>
 
       {/* Tjänster: första kortet målas i den kulör besökaren valt */}
-      <section className="bg-muted py-20 sm:py-28">
+      <section className="band py-28 sm:py-36">
         <div className="container-page">
           <Reveal>
             <Heading className="max-w-2xl text-3xl sm:text-4xl lg:text-5xl">
-              Målning för hus, lägenheter och <Underline>fastigheter</Underline>
+              Det här hjälper vi <Underline>till med</Underline>
             </Heading>
           </Reveal>
 
           <div className="mt-12 grid gap-3 md:grid-cols-6">
             {TJANSTER.map((t, i) => {
               const live = i === 0;
-              const span = i === 0 ? "md:col-span-4" : i === 3 ? "md:col-span-4" : "md:col-span-2";
+              const span = i === 0 || i === 3 ? "md:col-span-4" : "md:col-span-2";
               return (
                 <Reveal key={t.titel} delay={i * 80} className={span}>
                   <article
@@ -214,22 +240,22 @@ function Start() {
       </section>
 
       {/* Så byggs en yta + kulörkoder */}
-      <section className="container-page grid gap-14 py-20 sm:py-28 lg:grid-cols-[1fr_1fr] lg:gap-20">
+      <section className="container-page grid gap-14 py-16 sm:py-24 lg:grid-cols-[1fr_1fr] lg:gap-20">
         <Reveal>
           <Heading className="text-3xl sm:text-4xl lg:text-5xl">
             Det du ser är sista <Underline>skiktet</Underline>
           </Heading>
           <p className="mt-6 max-w-md leading-relaxed text-muted-foreground">
-            En jämn, hållbar vägg blir till i flera lager. Så här ser tvärsnittet ut, nerifrån och
-            upp.
+            En vägg som ser bra ut och håller byggs i flera lager. Så här brukar ordningen vara,
+            nerifrån och upp.
           </p>
           <div className="mt-10 rounded-lg border border-border bg-card p-6">
             <p className="eyebrow">Kulörkoder</p>
             <p className="mt-3 leading-relaxed text-muted-foreground">
-              I Sverige beskrivs kulörer ofta med NCS. Koden{" "}
-              <span className="mono text-foreground">S 2005-Y20R</span> säger hur mörk (20), hur
-              färgstark (05) och åt vilket håll (Y20R, gulaktig med lite rött) kulören går. Visa
-              koden för oss så matchar vi den.
+              I Sverige anger man ofta kulörer med NCS-koder. Koden{" "}
+              <span className="mono text-foreground">S 2005-Y20R</span> betyder 20 % svärta, 5 %
+              kulörthet och en gulaktig ton (Y20R). Har du en kod hemma räcker det, så tar vi det
+              därifrån.
             </p>
           </div>
         </Reveal>
@@ -261,9 +287,11 @@ function Start() {
         </Reveal>
       </section>
 
+      <Grundare />
+
       {/* Utfört */}
       {HAR_PROJEKTBILDER && (
-        <section className="container-page pb-20 sm:pb-28">
+        <section className="container-page pb-16 sm:pb-24">
           <Reveal>
             <Heading className="max-w-2xl text-3xl sm:text-4xl lg:text-5xl">
               Utfört <Underline>arbete</Underline>
@@ -275,6 +303,8 @@ function Start() {
         </section>
       )}
 
+      <InstagramBand />
+
       {/* ROT */}
       {FORETAG.fskatt && (
         <section className="container-page pb-4">
@@ -285,8 +315,8 @@ function Start() {
                   ROT-avdrag direkt på <Underline>fakturan</Underline>
                 </Heading>
                 <p className="mt-5 max-w-xl leading-relaxed text-muted-foreground">
-                  {FORETAG.namn} har F-skatt, vilket krävs för att du ska kunna använda ROT-avdraget
-                  direkt på fakturan för måleriarbeten i ditt hem.
+                  {FORETAG.namn} har F-skatt, så ROT-avdraget kan dras direkt på fakturan för
+                  målningsarbeten i ditt hem.
                 </p>
               </div>
               <Link to="/rot" className="btn-base btn-primary">

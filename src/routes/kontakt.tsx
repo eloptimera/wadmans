@@ -86,6 +86,21 @@ function Kontakt() {
               <dt className="eyebrow">Adress</dt>
               <dd className="mt-2 text-muted-foreground">{FORETAG.adress}</dd>
             </div>
+            {FORETAG.instagram && (
+              <div>
+                <dt className="eyebrow">Instagram</dt>
+                <dd className="mt-2">
+                  <a
+                    href={FORETAG.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-ultra decoration-[0.1em] underline-offset-[0.3em] hover:text-ultra"
+                  >
+                    {FORETAG.instagramNamn}
+                  </a>
+                </dd>
+              </div>
+            )}
             <div>
               <dt className="eyebrow">Arbetsområde</dt>
               <dd className="mt-2 text-muted-foreground">{FORETAG.omrade}</dd>
