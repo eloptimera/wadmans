@@ -72,7 +72,7 @@ function Start() {
   const rader: string[] = FORETAG.erfarenhetAr
     ? ["Målare", `i ${FORETAG.ort}`, `med ${FORETAG.erfarenhetAr} års`, "erfarenhet"]
     : ["Målare", `i ${FORETAG.ort}`];
-  const forskjutning = ["lg:ml-[14%]", "lg:ml-[4%]", "lg:ml-[26%]", "lg:ml-[10%]"];
+  const forskjutning = ["lg:ml-[12%]", "lg:ml-[0%]", "lg:ml-[16%]", "lg:ml-[5%]"];
   const mobilForskjutning = ["ml-0", "ml-[8%]", "ml-[3%]", "ml-[12%]"];
 
   return (
@@ -83,7 +83,7 @@ function Start() {
         className="relative -mt-[5.25rem] overflow-hidden bg-closing pt-36 text-closing-foreground"
       >
         <div className="container-page relative pb-16 lg:min-h-[38rem] lg:pb-24">
-          <div className="relative z-10">
+          <div className="relative z-10 lg:pl-[19rem]">
             <h1
               className="text-[clamp(1.9rem,8.6vw,3.25rem)] leading-[1.02] font-extrabold text-orange sm:text-[clamp(3.25rem,8vw,6rem)] lg:text-[clamp(3.5rem,6vw,5.75rem)]"
               style={{ textShadow: "0 2px 28px rgba(10,16,29,0.65)" }}
@@ -99,7 +99,7 @@ function Start() {
               ))}
             </h1>
 
-            <div className="mt-10 max-w-md lg:ml-[30%]">
+            <div className="mt-10 max-w-md">
               <p className="text-lg leading-relaxed text-closing-foreground/85">
                 {FORETAG.vd ? `${FORETAG.vd} och ` : ""}
                 {FORETAG.namn} målar, spacklar och tapetserar hos privatpersoner och
